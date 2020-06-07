@@ -53,9 +53,20 @@ Node* newNode(string key)
 	node->right = NULL; 
 	node->height = 1; // new node is initially 
 	node->count = 1;				// added at leaf 
-	return(node); 
+	return node;
 } 
 
+Node* newNode2(string key) 
+{ 
+	Node* node = new Node(); 
+	node->key = key; 
+	node->left = NULL; 
+	node->right = NULL; 
+	node->height = 1; // new node is initially 
+	node->count = 1;// added at leaf 
+	cout <<"new key is " << key << endl;
+	return node;
+} 
 // A utility function to right 
 // rotate subtree rooted with y 
 // See the diagram given above. 
@@ -107,6 +118,49 @@ int getBalance(Node *N)
 		return 0; 
 	return height(N->left) - height(N->right); 
 } 
+
+
+
+
+int search(string value, Node* n){
+	if (!n){
+		cout << value << " not found\n";
+		return 0;;
+	}
+	else{
+	    if(value == n->key){
+		cout << value << " found, count = " << n->count << endl;
+		return n->count;
+	    }
+	    if(value < n->key){
+		return search(value,n->left);
+	    }
+	    else{
+		return search(value,n->right);
+	    }
+}
+}
+
+
+int search3(string value, Node* n){
+	if (!n){
+	
+		return 0;
+	}
+	else{
+	    if(value == n->key){
+		
+		return n->count;
+	    }
+	    if(value < n->key){
+		return search3(value,n->left);
+	    }
+	    else{
+		return search3(value,n->right);
+	    }
+}
+}
+
 
 // Recursive function to insert a key 
 // in the subtree rooted with node and 
@@ -168,7 +222,7 @@ Node* insert2(Node* node, string key)
 { 
 	/* 1. Perform the normal BST insertion */
 	if (node == NULL){ 
-		Node* p = newNode(key);
+		Node* p = newNode2(key);
 		cout << key << " inserted, new count = " << p->count << endl;
 		return p;
 	}
@@ -176,11 +230,12 @@ Node* insert2(Node* node, string key)
 		node->left = insert(node->left, key); 
 	else if (key > node->key) 
 		node->right = insert(node->right, key); 
-	else {
+	else {  
+		
 		node->count++;
-		cout << key << " inserted, new count = " << node->count << endl;
 		return node; 
 	}
+
 	/* 2. Update height of this ancestor node */
 	node->height = 1 + max(height(node->left), 
 						height(node->right)); 
@@ -216,49 +271,11 @@ Node* insert2(Node* node, string key)
 	} 
 
 	/* return the (unchanged) node pointer */
+	int u = search3(key,node);
+	cout << key << " inserted, new count = " << u  <<endl;
 	return node; 
 } 
-
-bool search(string value, Node* n){
-	if (!n){
-		cout << value << " not found\n";
-		return false;
-	}
-	else{
-	    if(value == n->key){
-		cout << value << " found, count = " << n->count << endl;
-		return true;
-	    }
-	    if(value < n->key){
-		return search(value,n->left);
-	    }
-	    else{
-		return search(value,n->right);
-	    }
-}
-}
-
-
-bool search3(string value, Node* n){
-	if (!n){
-	
-		return false;
-	}
-	else{
-	    if(value == n->key){
-		
-		return true;
-	    }
-	    if(value < n->key){
-		return search(value,n->left);
-	    }
-	    else{
-		return search(value,n->right);
-	    }
-}
-}
-
-
+/*
 void rangeSearchHelper(Node* r, string a, string b, vector<string>& v) {
 	
 	if(r == nullptr){
@@ -286,6 +303,43 @@ void rangeSearch(Node* r, string a, string b){
 	rangeSearchHelper(r,a,b,w);
 
 }
+*/
+
+
+void rangeSearch(Node *root, string k1, string k2)  
+{  
+    /* base case */
+    if ( NULL == root )  
+        return;  
+      
+    /* Since the desired o/p is sorted,  
+        recurse for left subtree first  
+        If root->data is greater than k1,  
+        then only we can get o/p keys  
+        in left subtree */
+    if ( k1 < root->key )  
+        rangeSearch(root->left, k1, k2);  
+      
+    /* if root's data lies in range,  
+    then prints root's data */
+    if ( k1 <= root->key && k2 >= root->key )  
+        cout<<root->key<<endl;
+      
+    /* If root->data is smaller than k2, 
+        then only we can get o/p keys  
+        in right subtree */
+    if ( k2 > root->key )  
+        rangeSearch(root->right, k1, k2);  
+}
+
+
+void print(Node* r){
+	if(r){
+		cout << r->key << endl;
+		print(r->left);
+		print(r->right);
+	}
+}
 
 int FirstSpace(string b, string x){
 for(size_t i = 0; i < b.length(); i++) {
@@ -300,32 +354,27 @@ Node* root = NULL;
 
 fstream file;
 string word, filename;
-//filename = "PA3_dataset.txt";
+filename = "PA3_dataset.txt";
 //filename = "/autograder/submission/PA3_dataset.txt";
-filename = "small.txt";
+//filename = "small.txt";
 file.open(filename.c_str());
 while (file >>word){
 
-insert2(root, word); 
-bool i = search(word,root);
+root = insert(root, word); 
 }
 
-bool x = search("day",root);
-/*
+
 ///////////////////////////////////////////////
 string str = argv[1];
 queue<string>q;
-
 stringstream ss(str);
 while (ss.good()){
     string substr;
     getline(ss, substr, ',');
     q.push(substr);
 }
-
 while (!q.empty()){
 string s = q.front();
-
 //////////////////////////////////////////////////////////
 if (s.find("insert") != std::string::npos){
 string w = " ";
@@ -335,11 +384,9 @@ for (size_t i = 0; i < s.length(); i++) {
             indexOfSpace = i;
         }
 }
-
 string key = s.substr(indexOfSpace+1, s.length()-1);
-Node* a = insert2(root, key);
+root = insert2(root, key);
 }
-
 ////////////////////////////////////////////////////////////
 else if (s.find("range") != std::string::npos){
 string extracted;
@@ -349,8 +396,6 @@ if(s[0] == 32){
 else if(s[0] == 114){
      extracted = s.erase(0,13);
 }
-
-
 string w = " ";
 int indexOfFirstSpace = 0;
 int indexOfLastSpace = 0;
@@ -359,18 +404,12 @@ for (size_t i = 0; i < extracted.length(); i++) {
             indexOfLastSpace = i;
         }
 }
-
 indexOfFirstSpace = FirstSpace(extracted, w);
-
 string a = extracted.substr(0, indexOfFirstSpace);
 string b = extracted.substr(indexOfLastSpace+1, extracted.length());
 
-cout << "broaching" <<endl;
 rangeSearch(root,a,b);
-
-
 }
-
 /////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 else if(s.find("search") != std::string::npos){
@@ -382,16 +421,11 @@ for (size_t i = 0; i < s.length(); i++) {
         }
 }
 string key = s.substr(indexOfSpace+1, s.length()-1);
-bool x = search(key,root);
+int x = search(key,root);
 }
-
 ////////////////////////////////////////////////////////////////////////
-
 q.pop();
-
-
-
 }
-*/
+
 return 0;
 }
