@@ -14,11 +14,10 @@ public:
 	~AVL();
 	bool search(string word) const;
 	
-	void insert(string key);
-	
 	void print();
 	void rangeSearch(string a, string b)const;
 
+	void insertHelper(string key);	
 	
 
 //	void  rangeSearch(Node* r, string a, string b) const;
@@ -43,9 +42,7 @@ public:
 	Node* rightRotate(Node *y);
 	Node* leftRotate(Node *x);
 	int getBalance(Node *N);
-	Node* insert(Node* node, string key);
 	void preOrder(Node *n);
-	Node*  insertHelper(Node *node,string key);
 };
 
 #endif

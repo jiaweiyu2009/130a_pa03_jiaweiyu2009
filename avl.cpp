@@ -82,11 +82,6 @@ int AVL::getBalance(Node *N){
 }
 
 
-void AVL::insert(string key){
-	Node* x = insertHelper(root, key);
-	cout << x->key << endl;
-
-}
 
 AVL::Node* AVL::insertHelper(Node* node, string key)
 {	/* 1. Perform the normal BST insertion */
