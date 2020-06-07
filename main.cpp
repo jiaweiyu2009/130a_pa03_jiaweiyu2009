@@ -33,15 +33,15 @@ avl.insert(avl.root, word);
 }
 */
 
-avl.insert(avl.root,"10");
+avl.insert("ab");
 
-avl.insert(avl.root,"20");
-avl.insert(avl.root,"30");
-avl.insert(avl.root,"40");
-avl.insert(avl.root,"50");
+avl.insert("cd");
+avl.insert("ef");
+avl.insert("hi");
+avl.insert("jk");
+avl.insert("zb");
 
-avl.insert(avl.root,"25");
-avl.preOrder(avl.root);
+avl.print();
 
 return 0;
 }

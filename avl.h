@@ -13,10 +13,10 @@ public:
 	AVL();
 	~AVL();
 	bool search(string word) const;
-	void insert2(string word, bool b);
-	void insert(string word);
 	
-	void print() const;
+	void insert(string key);
+	
+	void print();
 	void rangeSearch(string a, string b)const;
 
 	
@@ -30,6 +30,8 @@ public:
 		Node *left, *right, *parent;
 		int height;
 
+		//Node(string w="", int c=0, int h=0): key(w), count(c), height(h), left(0),right(0),parent(0){}
+
 	};
 
 	Node* root;
@@ -42,7 +44,8 @@ public:
 	Node* leftRotate(Node *x);
 	int getBalance(Node *N);
 	Node* insert(Node* node, string key);
-	void preOrder(Node *root);
+	void preOrder(Node *n);
+	Node*  insertHelper(Node *node,string key);
 };
 
 #endif

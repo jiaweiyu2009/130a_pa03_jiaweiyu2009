@@ -60,7 +60,7 @@ AVL::Node* AVL::rightRotate(Node* y){
 }
 
 AVL::Node* AVL::leftRotate(Node* x){
-		Node *y = x->right;
+	Node *y = x->right;
 	Node *T2 = y->left;
 
 	// Perform rotation
@@ -81,18 +81,25 @@ int AVL::getBalance(Node *N){
 	return height(N->left) - height(N->right);
 }
 
-AVL::Node* AVL::insert(Node* node, string key)
-{	/* 1. Perform the normal BST insertion */
-	if (node == NULL) 
-		return(newNode(key)); 
 
+void AVL::insert(string key){
+	Node* x = insertHelper(root, key);
+	cout << x->key << endl;
+
+}
+
+AVL::Node* AVL::insertHelper(Node* node, string key)
+{	/* 1. Perform the normal BST insertion */
+	if (!node) {
+		return(newNode(key));
+	}
 	if (key < node->key) 
-		node->left = insert(node->left, key); 
+		node->left = insertHelper(node->left, key); 
 	else if (key > node->key) 
-		node->right = insert(node->right, key); 
+		node->right = insertHelper(node->right, key); 
 	else // Equal keys are not allowed in BST 
 		return node; 
-
+	cout << "3432" << endl;
 	/* 2. Update height of this ancestor node */
 	node->height = 1 + max(height(node->left), 
 						height(node->right)); 
@@ -131,10 +138,14 @@ AVL::Node* AVL::insert(Node* node, string key)
 	return node; 
 }
 
-void AVL::preOrder(Node *root){
-	if(root != NULL){
-		cout << root -> key <<" ";
-		preOrder(root->left); 
-		preOrder(root->right); 
+void AVL::print(){
+	preOrder(root);
+}
+
+void AVL::preOrder(Node *n){
+	if(n){
+		cout << n -> key <<" ";
+		preOrder(n->left); 
+		preOrder(n->right); 
 	} 
 } 
