@@ -1,3 +1,11 @@
+//CS130A PA3
+//Jiawei Yu
+//8402075
+//avl.cpp
+//This is an implementation of an AVL tree.
+//To print the tree in preorder traversal, just use the command "print" after ./prog1.out
+//To print the height of the tree, just use the command "height" after ./prog1.out
+ 
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -7,14 +15,6 @@
 #include <algorithm>
 #include <sstream>
 #include <queue>
-
-//CS130A PA3
-//Jiawei Yu
-//8402075
-//I only implemented an AVL tree.
-//To print the tree in preorder traversal, just use the command "print" after ./prog1.out
-//To print the height of the tree, just use the command "height" after ./prog1.out
- 
 using namespace std; 
 
 // An AVL tree node 

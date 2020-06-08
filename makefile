@@ -1,4 +1,4 @@
 all: runEverything
 
-runEverything: main.cpp
-	g++ -std=c++11 -o prog1.out main.cpp
+runEverything: avl.cpp
+	g++ -std=c++11 -o prog1.out avl.cpp
