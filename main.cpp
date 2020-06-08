@@ -373,8 +373,8 @@ Node* root = NULL;
 fstream file;
 string word, filename;
 //filename = "PA3_dataset.txt";
-//filename = "/autograder/submission/PA3_dataset.txt";
-filename = "small.txt";
+filename = "/autograder/submission/PA3_dataset.txt";
+//filename = "small.txt";
 file.open(filename.c_str());
 while (file >>word){
 
