@@ -7,7 +7,13 @@
 #include <algorithm>
 #include <sstream>
 #include <queue>
-#include "avl.h"
+
+//CS130A PA3
+//Jiawei Yu
+//8402075
+//I only implemented an AVL tree.
+//To print the tree in preorder traversal, just use the command "print" after ./prog1.out
+//To print the height of the tree, just use the command "height" after ./prog1.out
  
 using namespace std; 
 
@@ -275,35 +281,6 @@ Node* insert2(Node* node, string key)
 	cout << key << " inserted, new count = " << u  <<endl;
 	return node; 
 } 
-/*
-void rangeSearchHelper(Node* r, string a, string b, vector<string>& v) {
-	
-	if(r == nullptr){
-		v.push_back(" ");
-	}
-	else if(a >= r->key && (search3(r->key,r) == true)){
-		rangeSearchHelper(r->right,a,b,v);
-	}
-	else if(a <= r->key && b >= r->key && (search3(r->key,r) == true)){
-		rangeSearchHelper(r->left,a,b,v);
-		cout << r->key<<endl;
-		rangeSearchHelper(r->right,a,b,v);
-	}
-		
-	
-	else if(b < r->key && (search3(r->key,r) == true)){
-		rangeSearchHelper(r->left,a,b,v);
-	}
-
-
-}
-
-void rangeSearch(Node* r, string a, string b){
-	vector<string>w;
-	rangeSearchHelper(r,a,b,w);
-
-}
-*/
 
 
 void rangeSearch(Node *root, string k1, string k2)  
