@@ -1,5 +1,4 @@
-disorders
-cat
-bob
-day
-apple
+hello
+ahoy
+howdy
+

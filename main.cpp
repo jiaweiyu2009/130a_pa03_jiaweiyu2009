@@ -332,14 +332,32 @@ void rangeSearch(Node *root, string k1, string k2)
         rangeSearch(root->right, k1, k2);  
 }
 
+void printNode(Node* r){
+	cout << "(" << r->key << ":" << r-> count;
+	if(r->left){
+		printNode(r->left);
+	}
+	else{
+		cout << "()";
+	}
+
+	if(r->right){
+		printNode(r->right);
+	}
+	else{
+		cout << "()";
+	}
+	cout << ")";
+}
 
 void print(Node* r){
 	if(r){
-		cout << r->key << endl;
-		print(r->left);
-		print(r->right);
+		printNode(r);
+		
 	}
+	cout<<"\n";
 }
+
 
 int FirstSpace(string b, string x){
 for(size_t i = 0; i < b.length(); i++) {
@@ -354,9 +372,9 @@ Node* root = NULL;
 
 fstream file;
 string word, filename;
-filename = "PA3_dataset.txt";
+//filename = "PA3_dataset.txt";
 //filename = "/autograder/submission/PA3_dataset.txt";
-//filename = "small.txt";
+filename = "small.txt";
 file.open(filename.c_str());
 while (file >>word){
 
@@ -424,6 +442,33 @@ string key = s.substr(indexOfSpace+1, s.length()-1);
 int x = search(key,root);
 }
 ////////////////////////////////////////////////////////////////////////
+
+else if(s.find("print") != std::string::npos){
+string w = " ";
+int indexOfSpace = 0;
+for (size_t i = 0; i < s.length(); i++) {
+        if (s.substr(i, w.length()) == w) {
+            indexOfSpace = i;
+        }
+}
+string key = s.substr(indexOfSpace+1, s.length()-1);
+print(root);
+}
+///////////////////////////////////////////////////////////////////////
+
+else if(s.find("height") != std::string::npos){
+string w = " ";
+int indexOfSpace = 0;
+for (size_t i = 0; i < s.length(); i++) {
+        if (s.substr(i, w.length()) == w) {
+            indexOfSpace = i;
+        }
+}
+string key = s.substr(indexOfSpace+1, s.length()-1);
+int h = height(root);
+cout << "Height = " << h << endl;
+}
+
 q.pop();
 }
 
